@@ -1,70 +1,110 @@
-# Getting Started with Create React App
+# photo-portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A SPA for a photo portfolio using React.
 
-## Available Scripts
+![screenshot](screenshot.png)
 
-In the project directory, you can run:
+|                                         |                                         |                                                   |
+| :-------------------------------------: | :-------------------------------------: | :-----------------------------------------------: |
+|    [Introduction](#photo-portfolio)     | [Table of Contents](#table-of-contents) | [Development Highlights](#development-highlights) |
+|        [Deployment](#deployment)        |             [Tests](#tests)             |       [Code Hightlights](#code-highlights)        |
+| [Technologies Used](#Technologies-Used) |           [Credits](#Credits)           |                [License](#License)                |
 
-### `yarn start`
+## Development Highlight
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Conditionally render components.
+- Manage state between the parent and child components.
+- Toggle the state of modal using hooks.
+- Set up tests for React components.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Installation
 
-### `yarn test`
+Deployed through GitHub Pages.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[Deployment](https://anusontarangkul.github.io/photo-portfolio/)
 
-### `yarn build`
+## Tests
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+npm run test
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Code Highlights
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Use react hooks to update the state of the form.
 
-### `yarn eject`
+```JavaScript
+    const [formState, setFormState] = useState({ name: '', email: '', message: '' });
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+    const [errorMessage, setErrorMessage] = useState('');
+    const { name, email, message } = formState;
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!errorMessage) {
+            console.log('Submit Form', formState);
+        }
+    };
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+    const handleChange = (e) => {
+        if (e.target.name === 'email') {
+            const isValid = validateEmail(e.target.value);
+            if (!isValid) {
+                setErrorMessage('Your email is invalid.');
+            } else {
+                setErrorMessage('');
+            }
+        } else {
+            if (!e.target.value.length) {
+                setErrorMessage(`${e.target.name} is required.`);
+            } else {
+                setErrorMessage('');
+            }
+        }
+        if (!errorMessage) {
+            setFormState({ ...formState, [e.target.name]: e.target.value });
+            console.log('Handle Form', formState);
+        }
+    };
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Mapping through the categories to create the lists of them and set onClick function.
 
-## Learn More
+```JavaScript
+    {categories.map((category) => (
+        <li className={`mx-1 ${
+            currentCategory.name === category.name && !contactSelected && 'navActive'
+                }`} key={category.name}>
+                    <span
+                        onClick={() => {
+                            setCurrentCategory(category)
+                            setContactSelected(false);
+                            }
+                        >
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Technologies-Used
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Frontend
 
-### Code Splitting
+- [HTML](https://www.w3schools.com/html/)
+- [JavaScript](https://www.javascript.com/)
+- [CSS](https://www.w3schools.com/css/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Frontend Framework/Library
 
-### Analyzing the Bundle Size
+- [ReactJS](https://reactjs.org/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Test
 
-### Making a Progressive Web App
+- [Jest](https://jestjs.io/docs/tutorial-react)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Credits
 
-### Advanced Configuration
+|                           |                                                                                                                                                                                                       |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **David Anusontarangkul** | [![Linkedin](https://i.stack.imgur.com/gVE0j.png) LinkedIn](https://www.linkedin.com/in/anusontarangkul/) [![GitHub](https://i.stack.imgur.com/tskMh.png) GitHub](https://github.com/anusontarangkul) |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## License
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
