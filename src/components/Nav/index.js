@@ -29,8 +29,8 @@ const Nav = (props) => {
                             About me
                         </a>
                     </li>
-                    <li>
-                        <span>Contact</span>
+                    <li className={`mx-2 ${contactSelected && 'navActive'}`}>
+                        <span onClick={() => setContactSelected(true)}>Contact</span>
                     </li>
                     {categories.map((category) => (
                         <li className={`mx-1 ${
