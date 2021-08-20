@@ -7,12 +7,12 @@ const Nav = (props) => {
     const {
         categories = [],
         setCurrentCategory,
-        currentCaregory
+        currentCategory
     } = props;
 
     useEffect(() => {
-        document.title = capitalizeFirstLetter(currentCaregory.name)
-    }, [currentCaregory]);
+        document.title = capitalizeFirstLetter(currentCategory.name)
+    }, [currentCategory]);
     return (
         <header className="flex-row px-1">
             <h2>
@@ -32,7 +32,7 @@ const Nav = (props) => {
                     </li>
                     {categories.map((category) => (
                         <li className={`mx-1 ${
-                            currentCaregory.name === category.name && 'navActive'
+                            currentCategory.name === category.name && 'navActive'
                             }`} key={category.name}>
                             <span
                                 onClick={() => {
