@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://anusontarangkul.github.io/photo-port",
+  "homepage": "http://anusontarangkul.github.io/photo-portfolio",
   "dependencies": {
     "@testing-library/user-event": "^12.1.10",
     "react": "^17.0.2",
